@@ -1,0 +1,39 @@
+# Configuración global de Quarkus
+quarkus:
+  # 1. Base de Datos MariaDB
+  datasource:
+    db-kind: mariadb
+    username: root
+    password: root
+    jdbc:
+      url: jdbc:mariadb://localhost:3318/db_clublaspalmas
+  
+  # 2. Hibernate ORM y JPA
+  hibernate-orm:
+    database:
+      generation: none
+    log:
+      sql: true
+
+  # 3. Puerto del servidor alternativo
+  http:
+    port: 8087
+    cors:
+      enabled: true
+      origins: http://localhost:3000,http://localhost:5173,http://192.168.1.49:3000
+      methods: GET,POST,PUT,DELETE,OPTIONS
+      headers: Authorization,Content-Type
+      access-control-allow-credentials: true
+
+  # 4. Configuración de firma SmallRye JWT (Se unifica bajo el 'quarkus:' inicial)
+  smallrye-jwt:
+    sign-key: privateKey.pem
+    encrypt-key: publicKey.pem
+
+# 5. Configuración de Validación JWT (MicroProfile va fuera del bloque 'quarkus:')
+mp:
+  jwt:
+    verify:
+      issuer: https://club-sabado-api.com
+
+    
